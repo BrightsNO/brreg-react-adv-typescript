@@ -1,0 +1,25 @@
+# Dependencies (applies to every session's start and solution project)
+node_modules/
+
+# Build output and tooling caches
+dist/
+.vite/
+*.tsbuildinfo
+.eslintcache
+
+# Test coverage
+coverage/
+
+# npm debug logs
+npm-debug.log*
+
+# Local environment overrides
+# Keep .env and .env.production trackable: they are course inputs.
+.env.local
+.env.*.local
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
