@@ -1,0 +1,47 @@
+// ---------- Spørsmål ----------
+
+// Kategoriene er en verdi i koden. Typen lages fra den samme listen,
+// så de aldri kommer ut av sync.
+export const CATEGORIES = ["react", "typescript", "web"] as const;
+export type Category = (typeof CATEGORIES)[number]; // "react" | "typescript" | "web"
+
+export type Question = {
+  id: string;
+  text: string;
+  options: string[];
+  /** Indeksen til riktig svar i options. */
+  correct: number;
+  category: Category;
+};
+
+// ---------- Lastetilstand ----------
+
+export type LoadState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: string };
+
+// ---------- Spilltilstand ----------
+
+export type GameState =
+  | { phase: "lobby" }
+  | { phase: "question"; index: number; answers: number[] }
+  | { phase: "reveal"; index: number; answers: number[] }
+  | { phase: "finished"; answers: number[] };
+
+// ---------- Poeng per kategori ----------
+
+// Mapped type: ett felt per kategori. Legger noen til en ny kategori i CATEGORIES,
+// krever TypeScript at alle objekter av denne typen får et felt for den.
+export type ScoreByCategory = { [C in Category]: { correct: number; total: number } };
+
+// ---------- Topplista ----------
+
+export type LeaderboardEntry = {
+  name: string;
+  score: number;
+  total: number;
+  /** Tidspunkt som ISO-tekst, for eksempel "2026-10-01T10:00:00.000Z". */
+  playedAt: string;
+};
